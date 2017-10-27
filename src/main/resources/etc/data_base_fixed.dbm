@@ -1,0 +1,520 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+CAUTION: Do not modify this file unless you know what you are doing.
+         Unexpected results may occur if the code is changed deliberately.
+-->
+<dbmodel pgmodeler-ver="0.8.2-beta" last-position="0,431" last-zoom="1"
+	 default-owner="postgres">
+<database name="nouvelle_base">
+</database>
+
+<schema name="public" fill-color="#e1e1e1" sql-disabled="true">
+</schema>
+
+<schema name="ifacture" rect-visible="true" fill-color="#e1e1e1">
+	<role name="postgres"/>
+</schema>
+
+<table name="t_client">
+	<schema name="ifacture"/>
+	<role name="postgres"/>
+	<position x="788" y="23"/>
+	<column name="id_client" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="reference" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="nom_entreprise">
+		<type name="character varying" length="60"/>
+	</column>
+	<column name="siret">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="num_tva">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="titre">
+		<type name="character varying" length="60"/>
+	</column>
+	<column name="prenom">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="nom_f">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="email">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="tele_fixe">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="tele_port">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="adresse">
+		<type name="character varying" length="60"/>
+	</column>
+	<column name="code_postale" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="complemement_adresse">
+		<type name="character varying" length="40"/>
+	</column>
+	<column name="ville">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="pays">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="langue_facture">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="delai_paiement">
+		<type name="int2"/>
+	</column>
+	<column name="tva">
+		<type name="float"/>
+	</column>
+	<column name="is_particulier">
+		<type name="boolean"/>
+	</column>
+	<constraint name="c_client" type="pk-constr" table="ifacture.t_client">
+		<columns names="id_client" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<schema name="ifacture_cp" rect-visible="true" fill-color="#e1e1e1">
+	<role name="postgres"/>
+</schema>
+
+<sequence name="t_entreprise"
+	 start="1" increment="1"
+	 min-value="0" max-value="2147483647"
+	 cache="1" cycle="false">
+	<schema name="ifacture"/>
+	<role name="postgres"/>
+</sequence>
+
+<table name="t_pays">
+	<schema name="ifacture"/>
+	<role name="postgres"/>
+	<position x="268" y="167"/>
+	<column name="id" not-null="true">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="label">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="c_pays" type="pk-constr" table="ifacture.t_pays">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<schema name="ifacture_cp1" rect-visible="true" fill-color="#e1e1e1">
+	<role name="postgres"/>
+</schema>
+
+<table name="t_devise">
+	<schema name="ifacture"/>
+	<role name="postgres"/>
+	<position x="245" y="280"/>
+	<column name="id" not-null="true">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="label">
+		<type name="character varying" length="50"/>
+	</column>
+	<constraint name="c_devise" type="pk-constr" table="ifacture.t_devise">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="t_produit">
+	<schema name="ifacture"/>
+	<role name="postgres"/>
+	<position x="1460.5" y="1023.7"/>
+	<column name="id_produit" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="nom" not-null="true">
+		<type name="character varying" length="60"/>
+	</column>
+	<column name="description">
+		<type name="character varying" length="300"/>
+	</column>
+	<column name="unite" not-null="true">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="tarif">
+		<type name="character varying" length="5"/>
+	</column>
+	<column name="prix">
+		<type name="float"/>
+	</column>
+	<column name="tva">
+		<type name="float"/>
+	</column>
+	<constraint name="c_produit" type="pk-constr" table="ifacture.t_produit">
+		<columns names="id_produit" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="t_unite">
+	<schema name="ifacture"/>
+	<role name="postgres"/>
+	<position x="264.75" y="96.05"/>
+	<column name="id" not-null="true">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="label" not-null="true">
+		<type name="character varying" length="15"/>
+	</column>
+	<constraint name="c_unite" type="pk-constr" table="ifacture.t_unite">
+		<columns names="id" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="t_compte">
+	<schema name="ifacture"/>
+	<role name="postgres"/>
+	<position x="903" y="581"/>
+	<column name="id_compte" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="nom_entreprise">
+		<type name="character varying" length="40"/>
+	</column>
+	<column name="email_contact">
+		<type name="character varying" length="35"/>
+	</column>
+	<column name="siret">
+		<type name="character varying" length="25"/>
+	</column>
+	<column name="num_tva">
+		<type name="character varying" length="25"/>
+	</column>
+	<column name="statut_juridique">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="rcs">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="tva_type">
+		<type name="character varying" length="15"/>
+	</column>
+	<column name="tva_default">
+		<type name="float"/>
+	</column>
+	<column name="pays">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="adresse">
+		<type name="character varying" length="60"/>
+	</column>
+	<column name="complemement_adresse">
+		<type name="character varying" length="40"/>
+	</column>
+	<column name="code_postale" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="ville">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="site">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="prenom_interlocteur">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="nom_interlocteur">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="email">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="tele_port">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="tele_fixe">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="logo">
+		<type name="character varying" length="40"/>
+	</column>
+	<constraint name="c_compte" type="pk-constr" table="ifacture.t_compte">
+		<columns names="id_compte" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_paiement_t_paiement" index="21"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="t_compte_uq" index="1"/>
+		<object name="t_paiement_fk" index="0"/>
+	</customidxs>
+</table>
+
+<table name="t_utilisateur">
+	<schema name="ifacture"/>
+	<role name="postgres"/>
+	<position x="214" y="397.7"/>
+	<column name="id_compte_utilisateur" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="identifiant" not-null="true">
+		<type name="character varying" length="40"/>
+	</column>
+	<column name="password" not-null="true">
+		<type name="character varying" length="40"/>
+	</column>
+	<constraint name="c_utilisateur" type="pk-constr" table="ifacture.t_utilisateur">
+		<columns names="id_compte_utilisateur" ref-type="src-columns"/>
+	</constraint>
+	<constraint name="c_ideniutilisateur" type="uq-constr" table="ifacture.t_utilisateur">
+		<columns names="identifiant" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<table name="t_paiement">
+	<schema name="ifacture"/>
+	<role name="postgres"/>
+	<position x="226" y="642.7"/>
+	<column name="id_paiement" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="label">
+		<type name="character varying" length="60"/>
+	</column>
+	<column name="paypal">
+		<type name="character varying" length="60"/>
+	</column>
+	<column name="banque">
+		<type name="character varying" length="80"/>
+	</column>
+	<column name="code_wift">
+		<type name="character varying" length="60"/>
+	</column>
+	<column name="iban">
+		<type name="character varying" length="30"/>
+	</column>
+	<constraint name="c_paiement" type="pk-constr" table="ifacture.t_paiement">
+		<columns names="id_paiement" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="t_compte_has_one_t_paiement" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="ifacture.t_paiement"
+	 dst-table="ifacture.t_compte"
+	 src-required="false" dst-required="false"/>
+
+<table name="t_commercial">
+	<schema name="ifacture"/>
+	<role name="postgres"/>
+	<position x="1483" y="753"/>
+	<column name="id_commercial" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="nom_entreprise">
+		<type name="character varying" length="40"/>
+	</column>
+	<column name="adresse">
+		<type name="character varying" length="60"/>
+	</column>
+	<column name="complemement_adresse">
+		<type name="character varying" length="40"/>
+	</column>
+	<column name="code_postale" not-null="true">
+		<type name="integer"/>
+	</column>
+	<column name="ville">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="site">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="prenom_commercial">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="nom_commercial">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="email">
+		<type name="character varying" length="30"/>
+	</column>
+	<column name="tele_port">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="tele_fixe">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="logo">
+		<type name="character varying" length="40"/>
+	</column>
+	<column name="is_active" default-value="false">
+		<type name="boolean"/>
+	</column>
+	<constraint name="c_commercial" type="pk-constr" table="ifacture.t_commercial">
+		<columns names="id_commercial" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="t_compte_has_many_t_client" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="ifacture.t_compte"
+	 dst-table="ifacture.t_client"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="t_utilisateur_has_one_t_compte" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="ifacture.t_compte"
+	 dst-table="ifacture.t_utilisateur"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="t_compte_has_many_t_commercial" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="ifacture.t_compte"
+	 dst-table="ifacture.t_commercial"
+	 src-required="false" dst-required="false"/>
+
+<table name="t_facture">
+	<schema name="ifacture"/>
+	<role name="postgres"/>
+	<position x="164" y="920.7"/>
+	<column name="id_facture" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="date_facturation" not-null="true">
+		<type name="date"/>
+	</column>
+	<column name="delai_paiement">
+		<type name="integer"/>
+	</column>
+	<column name="type_facture">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="devis">
+		<type name="character varying" length="100"/>
+	</column>
+	<column name="langue" default-value="francais">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="avecRemise" default-value="false">
+		<type name="boolean"/>
+	</column>
+	<column name="remise" default-value="0">
+		<type name="integer"/>
+	</column>
+	<column name="en_tete" default-value="FACTURE">
+		<type name="character varying" length="60"/>
+	</column>
+	<column name="note">
+		<type name="character varying" length="300"/>
+	</column>
+	<column name="status">
+		<type name="character varying" length="20"/>
+	</column>
+	<column name="isDevis" default-value="false">
+		<type name="boolean"/>
+	</column>
+	<constraint name="c_facture" type="pk-constr" table="ifacture.t_facture">
+		<columns names="id_facture" ref-type="src-columns"/>
+	</constraint>
+</table>
+
+<relationship name="t_compte_has_many_t_facture" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="ifacture.t_compte"
+	 dst-table="ifacture.t_facture"
+	 src-required="false" dst-required="false">
+	<label ref-type="name-label">
+		<position x="-8.48033" y="76.6893"/>
+	</label>
+</relationship>
+
+<relationship name="t_facture_has_one_t_commercial" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="ifacture.t_commercial"
+	 dst-table="ifacture.t_facture"
+	 src-required="false" dst-required="false"/>
+
+<relationship name="t_facture_has_one_t_client" type="rel11"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="ifacture.t_client"
+	 dst-table="ifacture.t_facture"
+	 src-required="false" dst-required="false"/>
+
+<table name="t_produit_facture">
+	<schema name="ifacture"/>
+	<role name="postgres"/>
+	<position x="978.5" y="1002.7"/>
+	<column name="id_produit" not-null="true">
+		<type name="serial"/>
+	</column>
+	<column name="description">
+		<type name="character varying" length="300"/>
+	</column>
+	<column name="date">
+		<type name="date"/>
+	</column>
+	<column name="quantite" default-value="1">
+		<type name="float"/>
+	</column>
+	<column name="unite" not-null="true">
+		<type name="character varying" length="10"/>
+	</column>
+	<column name="tarif">
+		<type name="character varying" length="5"/>
+	</column>
+	<column name="prix">
+		<type name="float"/>
+	</column>
+	<column name="tva">
+		<type name="float"/>
+	</column>
+	<constraint name="c_produit_facture" type="pk-constr" table="ifacture.t_produit_facture">
+		<columns names="id_produit" ref-type="src-columns"/>
+	</constraint>
+
+	<customidxs object-type="column">
+		<object name="id_facture_t_facture" index="8"/>
+	</customidxs>
+
+	<customidxs object-type="constraint">
+		<object name="t_facture_fk" index="1"/>
+	</customidxs>
+</table>
+
+<relationship name="t_facture_has_many_t_produit_facture" type="rel1n"
+	 src-col-pattern="{sc}_{st}"
+	 pk-pattern="{dt}_pk" uq-pattern="{dt}_uq"
+	 src-fk-pattern="{st}_fk"
+	 custom-color="#83af1f"
+	 src-table="ifacture.t_facture"
+	 dst-table="ifacture.t_produit_facture"
+	 src-required="false" dst-required="false"/>
+
+</dbmodel>
